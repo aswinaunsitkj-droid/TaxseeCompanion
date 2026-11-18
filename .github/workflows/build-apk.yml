@@ -20,14 +20,13 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Download Gradle and Build
+    - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
+      with:
+        cache-read-only: false
 
-    - name: Compile Project
-      run: |
-        # Mengunduh dan menginisialisasi Gradle secara mandiri via CLI
-        gradle --version
-        gradle assembleDebug
+    - name: Build APK
+      run: gradle assembleDebug --continue
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
