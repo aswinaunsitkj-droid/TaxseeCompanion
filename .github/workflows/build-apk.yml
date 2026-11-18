@@ -20,11 +20,14 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Build APK with Gradle Actions
+    - name: Download Gradle and Build
       uses: gradle/actions/setup-gradle@v3
-      with:
-        gradle-version: '8.5'
-        arguments: assembleDebug
+
+    - name: Compile Project
+      run: |
+        # Mengunduh dan menginisialisasi Gradle secara mandiri via CLI
+        gradle --version
+        gradle assembleDebug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
